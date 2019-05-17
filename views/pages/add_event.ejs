@@ -35,28 +35,27 @@
               <div class="box-content">
 
 
-              <form class="form-horizontal" action="http://localhost:3000/event/edit/<%= items[0].id %>" method="post">
+              <form class="form-horizontal" action="http://localhost:3000/event/add" method="post">
                   <fieldset>
 
                     <div class="control-group">
-                      <input class="input-xlarge focused" name="id" id="id" type="hidden" value="<%= items[0].id %>">
                       <label class="control-label" for="e_name">Name</label>
                       <div class="controls">
-                        <input class="input-xlarge focused" name="e_name" id="e_name" type="text" value="<%= items[0].e_name %>" placeholder="event name">
+                        <input class="input-xlarge focused" name="e_name" id="e_name" type="text" value="" placeholder="event name">
                       </div>
                     </div>
 
                     <div class="control-group">
       							  <label class="control-label" for="e_start_date">Start Date</label>
         							  <div class="controls">
-        								     <input type="text" name="e_start_date" class="input-xlarge datepicker" id="e_start_date" value="<%= items[0].e_start_date %>" placeholder="start date">
+        								     <input type="text" name="e_start_date" class="input-xlarge datepicker" id="e_start_date" value="" placeholder="start date">
         							  </div>
   							   </div>
 
                    <div class="control-group">
                      <label class="control-label" for="e_end_date">End Date</label>
                        <div class="controls">
-                            <input type="text" name ="e_end_date" class="input-xlarge datepicker" id="e_end_date" value="<%= items[0].e_end_date %>" placeholder="closing date">
+                            <input type="text" name ="e_end_date" class="input-xlarge datepicker" id="e_end_date" value="" placeholder="closing date">
                        </div>
                   </div>
 
@@ -64,7 +63,7 @@
                   <div class="control-group">
                   <label class="control-label" for="e_location">Venue</label>
                         <div class="controls">
-                          <input class="input-xlarge focused" name="e_location" id="e_location" type="text" value="<%= items[0].e_location %>" placeholder="Event location">
+                          <input class="input-xlarge focused" name="e_location" id="e_location" type="text" value="" placeholder="Event location">
                         </div>
                   </div>
 
@@ -72,8 +71,8 @@
                     <div class="control-group">
                       <label class="control-label" for="e_desc">Description</label>
                           <div class="controls">
-                              <textarea name="e_desc" class="cleditor" id="textarea2" rows="3" ><%= items[0].e_desc %></textarea>
-                              <!--textarea name="e_desc" class="cleditor" id="textarea2" rows="3"></textarea-->
+                              <!--textarea name="e_desc" class="" id="textarea2" rows="3"></textarea-->
+                              <textarea name="e_desc" class="cleditor" id="textarea2" rows="3"></textarea>
                           </div>
                     </div>
 
@@ -93,10 +92,6 @@
             </div><!--/span-->
 
           </div><!--/row-->
-
-
-
-
 
 	</div><!--/.fluid-container-->
 
