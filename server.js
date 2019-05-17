@@ -85,6 +85,45 @@ app.post('/event/add',function(req,res){
 });
 
 
+// TO EDIT EVENT
+app.get('/event/edit/:id', function(req, res){
+  /* get the event list base on id*/
+
+  con.query("SELECT * FROM e_events WHERE id = '"+ req.params.id + "'", function(err, result){
+
+	//format the date
+
+result[0].e_start_date = dateFormat(result[0].e_start_date,"yyyy-mm-dd");
+result[0].e_end_date = dateFormat(result[0].e_end_date,"yyyy-mm-dd");
+
+    res.render('pages/edit_event',{
+      siteTitle : siteTitle,
+      pageTitle : "NODEJS CRUD APP. Editing... :" + result[0].e_name,
+      items : result
+    });
+  });
+});
+
+
+//TO UPDATE THE DATABASE
+app.post('/event/edit/:id', function(req, res){
+	/* get the record base on ID */
+  var query = "UPDATE `e_events` SET";
+        	query += " `e_name` = '"+req.body.e_name+"',";
+        	query += " `e_start_date` = '"+req.body.e_start_date+"',";
+        	query += " `e_end_date` = '"+req.body.e_end_date+"',";
+        	query += " `e_desc` = '"+req.body.e_desc+"',";
+        	query += " `e_location` = '"+req.body.e_location+"'";
+          query += " WHERE `e_events`.`id` = "+req.body.id+"";
+
+    con.query(query, function (err, result) {
+      if(result.affectedRows){
+        res.redirect(baseURL);
+      }
+    });
+});
+
+
 //CONNECTION TO THE SERVER
 var server = app.listen(3000,function(){
   console.log("server started on 3000");
