@@ -52,6 +52,37 @@ app.get('/', function(req, res){
   });
 });
 
+//THIS OPEN THE FORM/PAGE TO CREATE/ADD A NEW EVENT
+app.get('/event/add', function(req, res){
+
+  //con.query("SELECT * FROM e_events ORDER BY e_start_date DESC", function(err, result){
+    res.render('pages/add_event.ejs',{
+      siteTitle : siteTitle,
+      pageTitle : "NODEJS CRUD APP",
+      items : ''
+  //  });
+  });
+});
+
+
+/*
+	TO INSERT DATA FROM THE FORM TO THE DATABASE
+  THIS IS A POST METHOD TO DATA AND PRE-POPULATE TO THE FORM
+*/
+
+app.post('/event/add',function(req,res){
+	/* get the record base on ID */
+  var query ="INSERT INTO `e_events` (e_name,e_start_date,e_end_date,e_desc,e_location) VALUES (";
+        	query += " '"+req.body.e_name+"',";
+        	query += " '"+dateFormat(req.body.e_start_date,"yyyy-mm-dd")+"',";
+        	query += " '"+dateFormat(req.body.e_end_date,"yyyy-mm-dd")+"',";
+        	query += " '"+req.body.e_desc+"',";
+        	query += " '"+req.body.e_location+"')";
+
+    con.query(query, function (err, result) {
+	     res.redirect(baseURL);
+    });
+});
 
 
 //CONNECTION TO THE SERVER
