@@ -54,13 +54,11 @@ app.get('/', function(req, res){
 
 //THIS OPEN THE FORM/PAGE TO CREATE/ADD A NEW EVENT
 app.get('/event/add', function(req, res){
-
-  //con.query("SELECT * FROM e_events ORDER BY e_start_date DESC", function(err, result){
     res.render('pages/add_event.ejs',{
       siteTitle : siteTitle,
       pageTitle : "NODEJS CRUD APP",
       items : ''
-  //  });
+
   });
 });
 
@@ -71,7 +69,9 @@ app.get('/event/add', function(req, res){
 */
 
 app.post('/event/add',function(req,res){
-	/* get the record base on ID */
+	/*
+  get the record base on ID
+  */
   var query ="INSERT INTO `e_events` (e_name,e_start_date,e_end_date,e_desc,e_location) VALUES (";
         	query += " '"+req.body.e_name+"',";
         	query += " '"+dateFormat(req.body.e_start_date,"yyyy-mm-dd")+"',";
@@ -87,12 +87,12 @@ app.post('/event/add',function(req,res){
 
 // TO EDIT EVENT
 app.get('/event/edit/:id', function(req, res){
-  /* get the event list base on id*/
+  /*
+  get the event list base on id
+  */
 
   con.query("SELECT * FROM e_events WHERE id = '"+ req.params.id + "'", function(err, result){
-
 	//format the date
-
 result[0].e_start_date = dateFormat(result[0].e_start_date,"yyyy-mm-dd");
 result[0].e_end_date = dateFormat(result[0].e_end_date,"yyyy-mm-dd");
 
@@ -107,7 +107,8 @@ result[0].e_end_date = dateFormat(result[0].e_end_date,"yyyy-mm-dd");
 
 //TO UPDATE THE DATABASE
 app.post('/event/edit/:id', function(req, res){
-	/* get the record base on ID */
+	/* get the record base on ID
+  */
   var query = "UPDATE `e_events` SET";
         	query += " `e_name` = '"+req.body.e_name+"',";
         	query += " `e_start_date` = '"+req.body.e_start_date+"',";
@@ -122,6 +123,16 @@ app.post('/event/edit/:id', function(req, res){
       }
     });
 });
+
+// TO DELETE EVENT FROM THE DATABSE
+app.get('/event/delete/:id', function(req, res){
+  con.query("DELETE FROM e_events WHERE id = '"+ req.params.id + "'", function(err, result){
+      if(result.affectedRows)
+        {
+          res.redirect(baseURL);
+        }
+    });
+  });
 
 
 //CONNECTION TO THE SERVER
