@@ -23,17 +23,34 @@ app.set('view engine', 'ejs');
 app.use(express.static('resources'))
 
 //MYSQL DATABASE CONNECTION
-/*
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
   database: "node_crud"
 });
-*/
+
 //GLOBAL SITE TITLE AND BASE URL
 const siteTitle = "Nodejs CRUD app";
 const baseURL ="http://localhost:3000/";
+
+/**
+  * when page is loaded
+  *default page is loaded and the data is being called from mysql database
+  *we are also adding some js and css files
+  *for all the dependencies---see the package.json file for more info
+**/
+
+app.get('/', function(req, res){
+
+  con.query("SELECT * FROM e_events ORDER BY e_start_date DESC", function(err, result){
+    res.render('pages/index',{
+      siteTitle : siteTitle,
+      pageTitle : "NODEJS CRUD APP",
+      items : result
+    });
+  });
+});
 
 
 
